@@ -174,7 +174,7 @@
   }
 
   textarea {
-    @apply resize-vertical min-h-24;
+    @apply min-h-24;
   }
 }
 
@@ -261,11 +261,11 @@
     }
 
     .doc-header {
-      @apply page-break-after-avoid;
+      break-after: avoid;
     }
 
     .doc-section {
-      @apply page-break-inside-avoid;
+      break-inside: avoid;
     }
 
     input, textarea, select {
