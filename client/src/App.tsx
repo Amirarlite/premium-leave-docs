@@ -5,23 +5,27 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-
+import LeaveRequestForm from "./components/LeaveRequestForm";
+import LeaveApprovalLetter from "./components/LeaveApprovalLetter";
+import LeaveStatusTracker from "./components/LeaveStatusTracker";
+import LeaveCancellationForm from "./components/LeaveCancellationForm";
+import LeaveExtensionRequest from "./components/LeaveExtensionRequest";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/leave-request"} component={LeaveRequestForm} />
+      <Route path={"/leave-approval"} component={LeaveApprovalLetter} />
+      <Route path={"/leave-tracker"} component={LeaveStatusTracker} />
+      <Route path={"/leave-cancellation"} component={LeaveCancellationForm} />
+      <Route path={"/leave-extension"} component={LeaveExtensionRequest} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
   );
 }
-
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
 function App() {
   return (
