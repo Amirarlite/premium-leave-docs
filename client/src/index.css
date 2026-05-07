@@ -196,83 +196,433 @@
     min-width: 0;
   }
 
-  /* Document Header - Premium Style */
+  /* ============================================
+     MILITARY-GRADE DOCUMENT HEADER
+     Enhanced with official seal placeholder,
+     decorative borders, and authoritative styling
+     ============================================ */
   .doc-header {
-    @apply bg-primary text-white px-6 py-4 border-b-4 border-accent;
+    @apply bg-primary text-white px-8 py-6 relative overflow-hidden;
+    border-bottom: 6px solid var(--accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  .doc-header-title {
-    @apply text-2xl font-bold tracking-wide;
+  .doc-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 54, 93, 0.9) 0%, rgba(45, 90, 140, 0.7) 100%);
+    z-index: 0;
+  }
+
+  .doc-header-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .doc-header-seal {
+    width: 80px;
+    height: 80px;
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(184, 134, 11, 0.1);
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent);
     font-family: 'Georgia', serif;
   }
 
-  .doc-header-subtitle {
-    @apply text-xs uppercase tracking-widest text-gray-200 mt-1;
+  .doc-header-title {
+    @apply text-3xl font-bold tracking-widest uppercase;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.15em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
 
-  /* Document Section */
+  .doc-header-subtitle {
+    @apply text-xs uppercase tracking-[0.3em] text-gray-200 mt-2;
+    font-weight: 600;
+  }
+
+  .doc-header-meta {
+    text-align: right;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .doc-reference-number {
+    @apply font-mono text-xs uppercase tracking-wider;
+    background: rgba(184, 134, 11, 0.2);
+    padding: 4px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(184, 134, 11, 0.4);
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+  /* ============================================
+     PREMIUM DOCUMENT SECTIONS
+     With enhanced visual hierarchy and spacing
+     ============================================ */
   .doc-section {
-    @apply mb-6 pb-6 border-b border-border;
+    @apply mb-8 pb-6 border-b-2 border-border;
+    position: relative;
   }
 
   .doc-section:last-child {
-    @apply border-b-0;
+    @apply border-b-0 pb-0;
   }
 
-  /* Form Grid */
+  .doc-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 2px;
+  }
+
+  .doc-section h2 {
+    @apply text-xl font-bold text-primary mb-4 pl-3;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-left: 4px solid var(--accent);
+    padding-left: 16px;
+  }
+
+  /* ============================================
+     FORM GRID LAYOUTS
+     Premium alignment and spacing
+     ============================================ */
   .form-grid {
-    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5;
   }
 
   .form-grid-full {
-    @apply col-span-1 md:col-span-2;
+    @apply col-span-1 md:col-span-2 lg:col-span-3;
   }
 
-  /* Signature Line */
+  .form-field-group {
+    @apply relative;
+  }
+
+  .form-field-group label {
+    @apply block text-xs font-bold text-secondary uppercase tracking-wider mb-2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .form-field-group label::before {
+    content: '▸';
+    color: var(--accent);
+    font-size: 0.875rem;
+  }
+
+  .form-field-required::after {
+    content: '*';
+    color: #dc2626;
+    margin-left: 4px;
+    font-weight: bold;
+  }
+
+  /* ============================================
+     SIGNATURE BLOCKS
+     Official signature areas with guidelines
+     ============================================ */
   .signature-line {
-    @apply border-t border-foreground mt-8 pt-1 text-xs text-secondary;
+    @apply border-t-2 border-foreground mt-12 pt-2 text-xs text-secondary;
+    position: relative;
   }
 
-  /* Status Badge */
+  .signature-line::after {
+    content: 'SIGNATURE';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    font-size: 0.625rem;
+    color: var(--muted-foreground);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .signature-date {
+    @apply mt-2 text-xs text-muted-foreground;
+    font-family: 'Georgia', serif;
+  }
+
+  /* ============================================
+     STATUS BADGES
+     Military-grade status indicators
+     ============================================ */
   .status-badge {
-    @apply inline-block px-3 py-1 rounded text-xs font-bold uppercase tracking-wide;
+    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-sm text-xs font-bold uppercase tracking-wider;
+    border: 2px solid currentColor;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .status-approved {
-    @apply bg-green-100 text-green-800;
+    @apply bg-green-50 text-green-800 border-green-600;
   }
 
   .status-pending {
-    @apply bg-yellow-100 text-yellow-800;
+    @apply bg-yellow-50 text-yellow-800 border-yellow-600;
   }
 
   .status-rejected {
-    @apply bg-red-100 text-red-800;
+    @apply bg-red-50 text-red-800 border-red-600;
   }
 
-  /* Print Styles */
+  .status-conditional {
+    @apply bg-blue-50 text-blue-800 border-blue-600;
+  }
+
+  /* ============================================
+     PREMIUM TABLES
+     Enhanced table styling for data presentation
+     ============================================ */
+  .premium-table {
+    @apply w-full text-sm border-collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .premium-table thead tr {
+    @apply bg-primary text-white;
+  }
+
+  .premium-table th {
+    @apply border-2 border-primary px-5 py-3 text-left font-bold uppercase tracking-wider;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .premium-table td {
+    @apply border border-border px-5 py-3;
+  }
+
+  .premium-table tbody tr:hover {
+    @apply bg-input;
+  }
+
+  .premium-table tbody tr:nth-child(even) {
+    @apply bg-gray-50;
+  }
+
+  /* ============================================
+     INFO BOXES & ALERTS
+     Styled notification containers
+     ============================================ */
+  .info-box {
+    @apply p-5 rounded border-l-4;
+    background: linear-gradient(90deg, rgba(241, 245, 249, 0.8), rgba(248, 250, 252, 0.9));
+  }
+
+  .info-box-warning {
+    @apply bg-yellow-50 border-yellow-600;
+  }
+
+  .info-box-info {
+    @apply bg-blue-50 border-blue-600;
+  }
+
+  .info-box-success {
+    @apply bg-green-50 border-green-600;
+  }
+
+  .info-box-title {
+    @apply text-xs font-bold uppercase tracking-wider mb-2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ============================================
+     PRINT OPTIMIZATIONS
+     Professional print layout settings
+     ============================================ */
   @media print {
+    @page {
+      size: A4;
+      margin: 2cm;
+    }
+
     body {
       @apply bg-white text-black;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      font-size: 11pt;
+      line-height: 1.5;
     }
 
     .no-print {
-      @apply hidden;
+      @apply hidden !important;
     }
 
     .doc-header {
       break-after: avoid;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      box-shadow: none;
     }
 
     .doc-section {
       break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .premium-table {
+      break-inside: avoid;
+    }
+
+    .premium-table thead {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .status-badge {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
     input, textarea, select {
-      @apply border-b border-t-0 border-l-0 border-r-0 border-black bg-transparent;
+      @apply border-b-2 border-t-0 border-l-0 border-r-0 border-gray-800 bg-transparent;
+      padding: 4px 0;
+      font-family: inherit;
+      resize: none;
+    }
+
+    input[type="date"],
+    input[type="checkbox"] {
+      @apply border border-gray-400;
+    }
+
+    .card {
+      box-shadow: none !important;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Force page breaks where needed */
+    .page-break {
+      page-break-before: always;
+    }
+
+    /* Remove interactive elements */
+    button:not(.print-show) {
+      display: none !important;
     }
   }
 
+  /* ============================================
+     DECORATIVE ELEMENTS
+     Premium visual enhancements
+     ============================================ */
+  .doc-watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 8rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.03);
+    pointer-events: none;
+    z-index: 0;
+    font-family: 'Georgia', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .doc-footer {
+    @apply border-t-2 border-accent pt-4 mt-8;
+    text-align: center;
+  }
+
+  .doc-footer-text {
+    @apply text-xs text-muted-foreground;
+    font-family: 'Georgia', serif;
+  }
+
+  .doc-page-number {
+    @apply text-xs text-secondary font-mono;
+    position: absolute;
+    bottom: 1cm;
+    right: 2cm;
+  }
+
+  /* ============================================
+     UPLOAD CARDS & PREVIEWS
+     ============================================ */
+  .upload-card {
+    @apply p-4 rounded border border-border bg-input/30;
+    transition: all 0.2s ease;
+  }
+
+  .upload-card:hover {
+    @apply border-primary bg-input/50;
+  }
+
+  .uploaded-preview {
+    @apply flex items-center justify-center p-2 rounded bg-background border border-border mt-2;
+    min-height: 80px;
+  }
+
+  /* ============================================
+     LIVE PREVIEW PANEL
+     ============================================ */
+  .preview-panel {
+    @apply bg-gradient-to-br from-background to-slate-50;
+    border: 2px solid var(--primary);
+  }
+
+  .preview-section {
+    @apply pb-3 border-b border-border last:border-b-0;
+  }
+
+  .preview-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .preview-content::-webkit-scrollbar-track {
+    @apply bg-input rounded;
+  }
+
+  .preview-content::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded;
+  }
+
+  .doc-header-logo {
+    @apply w-16 h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border-2 border-accent shadow-md;
+  }
+
+  /* ============================================
+     CHECKBOX & RADIO ENHANCEMENTS
+     ============================================ */
+  input[type="checkbox"],
+  input[type="radio"] {
+    @apply w-4 h-4 accent-primary cursor-pointer;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+  }
+
+  input[type="checkbox"]:checked,
+  input[type="radio"]:checked {
+    @apply accent-primary;
+  }
+
+  /* ============================================
+     RESPONSIVE ADJUSTMENTS
+     ============================================ */
   @media (min-width: 640px) {
     .container {
       padding-left: 1.5rem;
