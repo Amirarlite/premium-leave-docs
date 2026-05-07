@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { Download, Printer } from "lucide-react";
+import { Download, Printer, Shield, FileCheck } from "lucide-react";
 
 interface ApprovalData {
   employeeName: string;
@@ -79,6 +79,14 @@ export default function LeaveApprovalLetter() {
     document.body.removeChild(element);
   };
 
+  const generateApprovalNumber = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    return `APV-${year}-${month}-${random}`;
+  };
+
   const getStatusBadgeClass = (status: string) => {
     switch (status) {
       case "approved":
@@ -86,20 +94,39 @@ export default function LeaveApprovalLetter() {
       case "pending":
         return "status-pending";
       case "conditional":
-        return "status-pending";
+        return "status-conditional";
       default:
         return "status-rejected";
     }
   };
 
   return (
-    <div className="min-h-screen bg-background py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
+    <div className="min-h-screen bg-background py-8 px-4 relative">
+      {/* Watermark */}
+      <div className="doc-watermark no-print">APPROVAL LETTER</div>
+      
+      <div className="max-w-5xl mx-auto relative z-10">
+        {/* Enhanced Military-Grade Header */}
         <div className="doc-header mb-8 rounded-t-lg">
-          <div className="doc-header-title">LEAVE APPROVAL LETTER</div>
-          <div className="doc-header-subtitle">
-            Official Leave Authorization Document
+          <div className="doc-header-content">
+            <div className="flex items-center gap-4">
+              <div className="doc-header-seal">
+                <FileCheck className="w-10 h-10" />
+              </div>
+              <div>
+                <div className="doc-header-title">LEAVE APPROVAL LETTER</div>
+                <div className="doc-header-subtitle">
+                  Official Leave Authorization Document
+                </div>
+                <div className="doc-reference-number">
+                  Ref: {generateApprovalNumber()}
+                </div>
+              </div>
+            </div>
+            <div className="doc-header-meta">
+              <div>CLASSIFICATION: CONFIDENTIAL</div>
+              <div className="mt-1">FORM APV-2024-A</div>
+            </div>
           </div>
         </div>
 
@@ -426,11 +453,12 @@ export default function LeaveApprovalLetter() {
 
             {/* Form Actions */}
             <div className="flex gap-4 mt-6">
-              <Button className="bg-primary hover:bg-primary/90">
+              <Button className="bg-primary hover:bg-primary/90" size="lg">
                 Update Letter
               </Button>
               <Button
                 variant="outline"
+                size="lg"
                 onClick={() =>
                   setFormData({
                     employeeName: "",
@@ -452,6 +480,17 @@ export default function LeaveApprovalLetter() {
               >
                 Clear Form
               </Button>
+            </div>
+
+            {/* Official Footer */}
+            <div className="doc-footer mt-12">
+              <p className="doc-footer-text">
+                This is an official authorization document issued by the Human Resources Department.
+              </p>
+              <p className="doc-footer-text mt-2">
+                Retain this document for your personnel records.
+              </p>
+              <div className="doc-page-number no-print">Page 1 of 1</div>
             </div>
           </div>
         </Card>
