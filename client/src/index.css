@@ -467,7 +467,8 @@
     }
 
     .no-print {
-      @apply hidden !important;
+      @apply hidden;
+      display: none !important;
     }
 
     .doc-header {
