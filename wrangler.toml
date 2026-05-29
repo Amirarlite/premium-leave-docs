@@ -5,6 +5,7 @@ compatibility_date = "2026-05-29"
 [build]
 command = "pnpm install && pnpm run build"
 build_caching = true
+pages_build_output_dir = "./dist/public"
 
 [vars]
 NODE_ENV = "production"
