@@ -1,47 +1,10 @@
-# =============================================================================
 # Cloudflare Pages Configuration
-# =============================================================================
-# Deploy to Cloudflare Pages for free global CDN
-# Docs: https://developers.cloudflare.com/pages/
-# =============================================================================
-
 name = "premium-leave-docs"
 compatibility_date = "2026-05-29"
-compatibility_flags = ["nodejs_compat"]
 
-# Build configuration
 [build]
-command = "pnpm run build"
+command = "pnpm install && pnpm run build"
 build_caching = true
 
-# Pages specific configuration
-pages_build_output_dir = "./dist/public"
-
-# Environment variables (production)
 [vars]
 NODE_ENV = "production"
-
-# Development configuration
-[dev]
-port = 3000
-local_protocol = "http"
-
-# =============================================================================
-# Deployment Commands
-# =============================================================================
-# 
-# Install Wrangler CLI:
-#   npm install -g wrangler
-# 
-# Login to Cloudflare:
-#   wrangler login
-# 
-# Deploy to preview:
-#   wrangler pages deploy dist/public --project-name=premium-leave-docs
-# 
-# Deploy to production:
-#   wrangler pages deploy dist/public --project-name=premium-leave-docs --branch=main
-# 
-# Or connect GitHub repo for auto-deploy:
-#   https://dash.cloudflare.com/pages
-# =============================================================================
