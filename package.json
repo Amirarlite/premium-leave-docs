@@ -1,15 +1,41 @@
 {
   "name": "premium-leave-docs",
   "version": "1.0.0",
+  "description": "Military-grade premium leave documentation suite with real-time preview and PDF generation",
   "type": "module",
   "license": "MIT",
+  "author": "Amirarlite",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Amirarlite/premium-leave-docs.git"
+  },
+  "keywords": [
+    "leave-management",
+    "hr-documents",
+    "pdf-generator",
+    "react",
+    "typescript",
+    "military-grade",
+    "enterprise"
+  ],
   "scripts": {
     "dev": "vite --host",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:all": "concurrently \"pnpm dev:server\" \"pnpm dev\"",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
-    "format": "prettier --write ."
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "security:audit": "pnpm audit",
+    "docker:build": "docker build -t premium-leave-docs:latest .",
+    "docker:run": "docker run -d -p 3000:3000 --name premium-leave-docs premium-leave-docs:latest",
+    "docker:stop": "docker stop premium-leave-docs && docker rm premium-leave-docs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -45,7 +71,9 @@
     "cmdk": "^1.1.1",
     "embla-carousel-react": "^8.6.0",
     "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
     "framer-motion": "^12.23.22",
+    "helmet": "^8.0.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.453.0",
     "nanoid": "^5.1.5",
@@ -68,7 +96,7 @@
     "@builder.io/vite-plugin-jsx-loc": "^0.1.1",
     "@tailwindcss/typography": "^0.5.15",
     "@tailwindcss/vite": "^4.1.3",
-    "@types/express": "4.17.21",
+    "@types/express": "^4.17.21",
     "@types/google.maps": "^3.58.1",
     "@types/node": "^24.7.0",
     "@types/react": "^19.2.1",
@@ -76,7 +104,10 @@
     "@vitejs/plugin-react": "^5.0.4",
     "add": "^2.0.6",
     "autoprefixer": "^10.4.20",
+    "concurrently": "^9.2.1",
     "esbuild": "^0.25.0",
+    "eslint": "^9.39.2",
+    "eslint-config-expo": "~10.0.0",
     "pnpm": "^10.15.1",
     "postcss": "^8.4.47",
     "prettier": "^3.6.2",
@@ -96,5 +127,9 @@
     "overrides": {
       "tailwindcss>nanoid": "3.3.7"
     }
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
   }
 }
